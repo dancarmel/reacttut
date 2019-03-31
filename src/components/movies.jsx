@@ -41,6 +41,7 @@ class Movies extends Component {
     <td>{movie.genre.name}</td>
     <td>{movie.numberInStock}</td>
     <td>{movie.dailyRentalRate}</td>
+    <td><i className="fa fa-heart-o align-middle" aria-hidden="true"></i></td>
     <td><button className="btn btn-danger" onClick={()=>this.handleDelete(movie)}>Delete</button></td>
     </tr>
 
