@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
+
 import Like from "./common/like";
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
+import { filter as filterArray } from "../utils/filter";
+import Filter from "./common/filter";
 class Movies extends Component {
   state = {
     movies: getMovies(),
     pageSize: 4,
-    currentPage: 1
+    currentPage: 1,
+    genres: getGenres(),
+    currentGenre: "none"
   };
 
   handleDelete = movie => {
@@ -27,14 +33,20 @@ class Movies extends Component {
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
+  handleGenreSelection = genre => {
+    console.log(genre);
+    this.setState({ currentGenre: genre.name });
+    console.log(filterArray(this.state.movies, genre));
+  };
 
   render() {
-    const { movies: allMovies, pageSize, currentPage } = this.state;
+    const { movies: allMovies, pageSize, currentPage, genres } = this.state;
 
     if (allMovies.length === 0)
       return <p>There are no movies in the database.</p>;
 
     const movies = paginate(allMovies, currentPage, pageSize);
+
     return (
       <div>
         <p>There are {allMovies.length} Movies in the Database</p>
@@ -78,6 +90,11 @@ class Movies extends Component {
           itemsCount={allMovies.length}
           onPageChange={this.handlePageChange}
           currentPage={currentPage}
+        />
+        <Filter
+          genres={genres}
+          onGenreSelection={this.handleGenreSelection}
+          currentGenre={this.state.currentGenre}
         />
       </div>
     );
