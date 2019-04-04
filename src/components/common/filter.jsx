@@ -7,7 +7,7 @@ class Filter extends Component {
       <a
         className="list-group-item list-group-item-action"
         key={index}
-        onClick={() => this.props.onGenreSelection(genre)}
+        onClick={() => this.props.onGenreSelection(genre.name)}
       >
         {genre.name}
       </a>
