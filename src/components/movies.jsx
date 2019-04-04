@@ -4,6 +4,7 @@ import { getGenres } from "../services/fakeGenreService";
 
 import Like from "./common/like";
 import Pagination from "./common/pagination";
+<<<<<<< HEAD
 import { paginate } from "../utils/paginate";
 import { filter as filterArray } from "../utils/filter";
 import Filter from "./common/filter";
@@ -14,6 +15,12 @@ class Movies extends Component {
     currentPage: 1,
     genres: getGenres(),
     currentGenre: "none"
+=======
+
+class Movies extends Component {
+  state = {
+    movies: getMovies()
+>>>>>>> parent of 45fc746... afterPagination
   };
 
   handleDelete = movie => {
@@ -30,9 +37,11 @@ class Movies extends Component {
     this.setState({ movies });
   };
 
-  handlePageChange = page => {
-    this.setState({ currentPage: page });
+  handlePageLimit = () => {
+    const movies = [...this.state.movies];
+    // finish pagination excersize
   };
+<<<<<<< HEAD
   handleGenreSelection = genre => {
     console.log(genre);
     // this.setState({ currentGenre: genre.name });
@@ -58,6 +67,13 @@ class Movies extends Component {
         </div>
         <div className="col">
           <p>There are {allMovies.length} Movies in the Database</p>
+=======
+  render() {
+    if (this.state.movies.length !== 0) {
+      return (
+        <div>
+          <p>There are {this.state.movies.length} Movies in the Database</p>
+>>>>>>> parent of 45fc746... afterPagination
 
           <table className="table">
             <thead>
@@ -69,7 +85,11 @@ class Movies extends Component {
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {movies.map(movie => (
+=======
+              {this.state.movies.map(movie => (
+>>>>>>> parent of 45fc746... afterPagination
                 <tr key={movie._id}>
                   <td>{movie.title}</td>
                   <td>{movie.genre.name}</td>
@@ -93,6 +113,7 @@ class Movies extends Component {
               ))}
             </tbody>
           </table>
+<<<<<<< HEAD
           <Pagination
             pageSize={pageSize}
             itemsCount={allMovies.length}
@@ -102,6 +123,13 @@ class Movies extends Component {
         </div>
       </div>
     );
+=======
+          <Pagination />
+        </div>
+      );
+    }
+    return <p>There are no movies in the database.</p>;
+>>>>>>> parent of 45fc746... afterPagination
   }
 }
 
