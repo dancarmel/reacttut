@@ -1,5 +1,4 @@
 import _ from "lodash";
-import PropTypes from "prop-types";
 
 export function paginate(items, pageNumber, pageSize) {
   const startIndex = (pageNumber - 1) * pageSize;
